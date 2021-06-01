@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-06-01 22:27:38
- * @LastEditTime: 2021-06-01 22:55:49
+ * @LastEditTime: 2021-06-02 00:48:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \countdown\count-down-source\src\utils\digit.js
