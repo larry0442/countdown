@@ -37,13 +37,13 @@ export default {
       // 设置 canvas 大小
       canvas.width = this.WIDTH;
       canvas.height = this.HEIGHT;
-
+      // 时间
+      this.currentShowTimeSeconds = this.getCurrentShowTimeSeconds();
       setInterval(() => {
-        // 时间
-        this.currentShowTimeSeconds = this.getCurrentShowTimeSeconds();
         // 渲染
         this.render(context);
-      }, 500);
+        this.update();
+      }, 50);
 
       // 时间
       // this.currentShowTimeSeconds = this.getCurrentShowTimeSeconds();
@@ -51,16 +51,29 @@ export default {
       // // 渲染
       // this.render(context);
     },
+    update() {
+      const nextShowTimesSeconds = this.getCurrentShowTimeSeconds();
+      // const nextHours = parseInt(nextShowTimesSeconds / 3600);
+      // const nextMinutes = parseInt((nextShowTimesSeconds % 3600) / 60);
+      const nextSeconds = parseInt(nextShowTimesSeconds % 60);
+      // 获取时间
+      // const currentHours = parseInt(this.currentShowTimeSeconds / 3600);
+      // const currentMinutes = parseInt((this.currentShowTimeSeconds % 3600) / 60);
+      const currentSeconds = parseInt(this.currentShowTimeSeconds % 60);
 
+      if(nextSeconds !== currentSeconds) {
+        this.currentShowTimeSeconds = nextShowTimesSeconds;
+      }
+    },
     // 渲染函数
     render (context) {
+      // 清除画布
+      context.clearRect(0, 0, this.WIDTH, this.HEIGHT);
       // 获取时间
       const hours = parseInt(this.currentShowTimeSeconds / 3600);
       const minutes = parseInt((this.currentShowTimeSeconds % 3600) / 60);
       const seconds = parseInt(this.currentShowTimeSeconds % 60);
 
-      // 清除画布
-      if (this.currentShowTimeSeconds != 0) { context.clearRect(0, 0, this.WIDTH, this.HEIGHT); }
       // 绘制时间
       this.renderDigit(this.MARGIN_LEFT + 0 * (this.RADIUS + 1), this.MARGIN_TOP, parseInt(hours / 10), context);
       this.renderDigit(this.MARGIN_LEFT + 15 * (this.RADIUS + 1), this.MARGIN_TOP, parseInt(hours % 10), context);
